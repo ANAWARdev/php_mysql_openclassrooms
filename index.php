@@ -1,30 +1,38 @@
+<!-- inclusion des variables et fonctions -->
 <?php
-
-// Déclaration du tableau des recettes
-$recipes = [
-    ['Cassoulet','[...]','mickael.andrieu@exemple.com',true,],
-    ['Couscous','[...]','mickael.andrieu@exemple.com',false,],
-];
-
+require_once(__DIR__ . '/variables.php');
+require_once(__DIR__ . '/functions.php');
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Affichage des recettes</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de recettes - Page d'accueil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <ul>
-        <?php for ($lines = 0; $lines <= 1; $lines++): ?>
-        <li><?php echo $recipes[$lines][0] . ' (' . $recipes[$lines][2] . ')'; ?></li>
-        <?php endfor; ?>
-    </ul>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container">
+
+        <!-- inclusion de l'entête du site -->
+        <?php require_once(__DIR__ . '/header.php'); ?>
+        <h1>Site de recettes</h1>
+
+        <?php foreach (getRecipes($recipes) as $recipe) : ?>
+        <article>
+            <h3><?php echo $recipe['title']; ?></h3>
+            <div><?php echo $recipe['recipe']; ?></div>
+            <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
+        </article>
+        <?php endforeach ?>
+    </div>
+
+    <!-- inclusion du bas de page du site -->
+    <?php require_once(__DIR__ . '/footer.php'); ?>
 </body>
 
 </html>
-
-
-
-
